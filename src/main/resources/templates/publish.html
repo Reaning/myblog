@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.css">
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/editormd.min.css">
+    <link rel="stylesheet" href="/css/myblog.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <script src="/js/editormd.min.js"></script>
+
+</head>
+<body>
+<div th:insert="navigation :: nav"></div>
+    <header class="header col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-image: url('/image/cs.jpg')">
+        <div class="container">
+            <div class="">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="header-title">
+                        <h1 class="font-title font-size:800">Clean Blog</h1>
+                        <span class="font-decr">A Blog Theme by Start Bootstrap</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="">
+                <form action="/publish" method="post">
+                    <input type="hidden" name="id" th:value="${id}">
+                    <div class="form-group">
+                        <label for="title" class="myfont-size">大标题:</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="大标题..." th:value="${title}">
+                    </div>
+                    <div class="form-group">
+                        <label for="title" class="myfont-size">小标题:</label>
+                        <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="小标题..." th:value="${subtitle}">
+                    </div>
+                    <div className="form-group" id="question-editor">
+                        <label htmlFor="description" class="myfont-size">博文:</label>
+                        <textarea name="description" id="description" th:text="${description}" style="display:none;"
+                                  className="form-control"
+                                  cols="30"
+                                  rows="10"></textarea>
+                    </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            var editor = editormd("question-editor", {
+                                width: "100%",
+                                height: 350,
+                                path: "/js/lib/",
+                                delay: 0,
+                                watch: false,
+                                placeholder: "请输入问题描述",
+                                tex: true,
+                                imageUpload    : true,
+                                imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                                imageUploadURL : "/file/upload",
+                            });
+                        });
+                    </script>
+                    <div class="form-group">
+                        <label for="title" class="myfont-size">添加标签</label>
+                        <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签,以,分隔标签" th:value="${tag}" onclick="showSelectTag()" autocomplete="off">
+                    </div>
+                    <div class="container-fluid main">
+                        <div class="row">
+                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" style="" >
+                                <div class="alert-danger col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${error}" th:if="${error!=null}"></div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="">
+                                <button type="submit" class="btn btn-success btn-publish">发布</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

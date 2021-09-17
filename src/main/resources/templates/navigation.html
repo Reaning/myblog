@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="nav">
+    <nav class="navbar navbar-light col-lg-12 col-md-12 col-sm-12 col-xs-12 nav-top myfont">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="/">Brand</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right" id="navbar-collapse">
+                <li th:if="${session.user != null && session.user.getId() == 1}">
+                    <a href="/publish" th:if="${session.user.id == 1}">发布</a>
+                </li>
+                <li th:if="${session.user == null}">
+                    <a href="https://gitee.com/oauth/authorize?client_id=21367aa55cd8a953015bd0c00a85a7da1948cbf2ea5737310fb53db03993c188&redirect_uri=http://localhost:9923/callback&response_type=code">登录</a>
+                </li>
+            </ul>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+    </div>
+</body>
+</html>
