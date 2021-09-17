@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.css">
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/myblog.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <script src="/js/moment.js"></script>
+    <script src="/js/editormd.min.js"></script>
+    <script src="/js/lib/marked.min.js"></script>
+    <script src="/js/lib/prettify.min.js"></script>
+</head>
+<body>
+    <div th:insert="navigation :: nav"></div>
+    <div th:insert="navigation :: header"></div>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panel" style="">
+                <span class="text-desc">
+                    作者：
+                    <span th:text="${article.user.name}"></span>|
+                    阅读数：
+                    <span th:text="${article.viewCount}"></span>|
+                    发布时间：
+                    <span th:text="${#dates.format(article.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
+                </span>
+                <div id="test-markdown-view">
+                    <textarea style="display:none;" th:text="${article.description}"></textarea>
+                </div>
+                <script type="text/javascript">
+                    $(function() {
+                        var testView = editormd.markdownToHTML("test-markdown-view", {
+                            tex:true
+                        });
+                    });
+                </script>
+                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

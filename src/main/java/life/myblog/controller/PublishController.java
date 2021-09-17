@@ -1,6 +1,6 @@
 package life.myblog.controller;
 
-import life.myblog.dto.ArticleDTO;
+
 import life.myblog.mapper.ArticleMapper;
 import life.myblog.model.Article;
 import life.myblog.model.User;

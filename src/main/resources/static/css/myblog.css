@@ -6,6 +6,7 @@
 /*}*/
 body{
     font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: #efefef;
 }
 
 .header {
@@ -66,4 +67,8 @@ body{
 .font-article-subtitle{
     font-size: 30px;
     font-weight: 300;
+}
+.panel-line{
+    border-color: #efefef;
+    border-width: 10px;
 }
