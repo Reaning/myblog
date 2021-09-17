@@ -25,14 +25,16 @@ public class CookieInteceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Cookie[] cookies = request.getCookies();
-        List<Cookie> token = Arrays.stream(cookies).filter(cookie -> cookie.getName().equals("token")).collect(Collectors.toList());
-        System.out.println(token.size());
-        if (token.size() == 1){
-            UserExample example = new UserExample();
-            example.createCriteria()
-                            .andTokenEqualTo(token.get(0).getValue());
-            List<User> users = userMapper.selectByExample(example);
-            request.getSession().setAttribute("user",users.get(0));
+        if(cookies.length > 0) {
+            List<Cookie> token = Arrays.stream(cookies).filter(cookie -> cookie.getName().equals("token")).collect(Collectors.toList());
+            System.out.println(token.size());
+            if (token.size() == 1) {
+                UserExample example = new UserExample();
+                example.createCriteria()
+                        .andTokenEqualTo(token.get(0).getValue());
+                List<User> users = userMapper.selectByExample(example);
+                request.getSession().setAttribute("user", users.get(0));
+            }
         }
         return true;
     }
