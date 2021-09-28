@@ -25,7 +25,7 @@ public class CookieInteceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Cookie[] cookies = request.getCookies();
-        if(cookies.length > 0) {
+        if(cookies != null) {
             List<Cookie> token = Arrays.stream(cookies).filter(cookie -> cookie.getName().equals("token")).collect(Collectors.toList());
             System.out.println(token.size());
             if (token.size() == 1) {
