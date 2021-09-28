@@ -15,7 +15,7 @@ public class CustomErrorController implements ErrorController {
     @GetMapping("/error")
     public ModelAndView errorHtml(HttpServletRequest request, Model model) {
         HttpStatus status = getStatus(request);
-        System.out.println(status.toString());
+//        System.out.println(status.toString());
         model.addAttribute("image","/images/error.png");
         if(status.is4xxClientError()){
             model.addAttribute("bigtitle","出错了！换个姿势试试？");

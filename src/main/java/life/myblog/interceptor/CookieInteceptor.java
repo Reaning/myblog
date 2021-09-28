@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -24,10 +23,17 @@ public class CookieInteceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        StringBuffer requestURL = request.getRequestURL();
+        String curUrl = requestURL.toString();
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+//        System.out.println(ipAddress);
+//        System.out.println(curUrl);
         Cookie[] cookies = request.getCookies();
-        if(cookies != null) {
+        if(cookies != null && cookies.length >= 1) {
             List<Cookie> token = Arrays.stream(cookies).filter(cookie -> cookie.getName().equals("token")).collect(Collectors.toList());
-            System.out.println(token.size());
             if (token.size() == 1) {
                 UserExample example = new UserExample();
                 example.createCriteria()
