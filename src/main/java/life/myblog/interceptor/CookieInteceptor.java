@@ -39,7 +39,9 @@ public class CookieInteceptor implements HandlerInterceptor {
                 example.createCriteria()
                         .andTokenEqualTo(token.get(0).getValue());
                 List<User> users = userMapper.selectByExample(example);
-                request.getSession().setAttribute("user", users.get(0));
+                if (users != null && users.size() > 0) {
+                    request.getSession().setAttribute("user", users.get(0));
+                }
             }
         }
         return true;

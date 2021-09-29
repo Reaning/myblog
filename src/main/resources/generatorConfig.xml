@@ -35,5 +35,6 @@
 
         <table tableName="user" domainObjectName="User"></table>
         <table tableName="article" domainObjectName="Article"></table>
+        <table tableName="visitor" domainObjectName="Visitor"></table>
     </context>
 </generatorConfiguration>
